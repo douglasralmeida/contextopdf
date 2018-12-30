@@ -6,7 +6,8 @@ uses
   uShellMenu_TLB in 'source\uShellMenu_TLB.pas',
   uShellMenu in 'source\uShellMenu.pas',
   frmDividir in 'source\frmDividir.pas' {FormDividir},
-  uProcessador in 'source\uProcessador.pas';
+  uProcessador in 'source\uProcessador.pas',
+  uAuxiliar in 'source\uAuxiliar.pas';
 
 exports
   DllGetClassObject,
