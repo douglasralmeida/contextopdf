@@ -99,6 +99,8 @@ object FormDividir: TFormDividir
       Left = 0
       Top = 0
       Caption = 'Inicial'
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label2: TLabel
         Left = 0
         Top = 0
@@ -164,6 +166,8 @@ object FormDividir: TFormDividir
       Left = 0
       Top = 0
       Caption = 'Andamento'
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label3: TLabel
         Left = 0
         Top = 0
