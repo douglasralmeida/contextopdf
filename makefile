@@ -1,37 +1,19 @@
 # Makefile
 
-#### Secao dos cabecalhos ####
-##PROJECTNAME=definido no arquivo .bat
-##CXX=definido no arquivo .bat
-DEFS=-D_UNICODE -D_WIN32_WINNT=0x0600
-# Comandos para usar no DEFS
-# -D_UNICODE -DUNICODE		Adicona suporte a Unicode.
-# -D_WIN32_WINNT=0x0600		O aplicativo requer Windows Vista ou superior.
-
-CXXFLAGS=-c -Wall -Wextra -Wpedantic $(DEFS) -Iinclude/
-
-LIBS=-lqpdf
-LDFLAGS=-Llib#-mwindows -municode
-BINDIR=bin
-OBJDIR=obj
-OBJFILES=pdfhandler.o
-OBJECTS=$(addprefix $(OBJDIR)/, $(OBJFILES))
-RESDIR=res
+OBJFILES=pdfprocessor.o pdfhandler.o pdfcli.o
 SOURCEDIR=source
-TESTDIR=test
+PROJS=pdfhandler cli
 
 #### Secao das regras ####
-$(OBJDIR)/%.o: $(SOURCEDIR)/pdfhandler/%.cc
-	@(echo. && echo Compilando $<...)
-	$(CXX) $(DBGFLAGS) $(CXXFLAGS) $< -o $@
+%:
+	$(MAKE) -C $(SOURCEDIR)/$@
 
-$(PROJECTNAME).exe: $(OBJECTS)
-	@(echo. && echo Gerando executavel...)
-	$(CXX) $(LDFLAGS) -o $(BINDIR)/$@ $^ $(LIBS)
+all: $(PROJS)
 
-all: clean $(PROJECTNAME).exe
+.PHONY: all
 
 clean:
 	@echo Executando limpeza...
 	del /q $(addprefix $(OBJDIR)\, $(OBJFILES))
-	del /q $(BINDIR)\$(PROJECTNAME).exe
+	del /q $(BINDIR)\pdfhandler.dll
+	del /q $(BINDIR)\pdfc.exe
