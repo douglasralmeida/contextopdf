@@ -15,7 +15,7 @@ class SplitBySize {
         bool delsource;                         //delete de source file
         int pdfno;                              //number of pdf files generated
         bool forcereplace;                      //force pdf write
-        size_t maxsize;                         //max pdf file size in bytes
+        unsigned long maxsize;                         //max pdf file size in bytes
         QPDF inpdf;
         void openPdf();
         void buildPdf(QPDF* pdf);
@@ -24,6 +24,7 @@ class SplitBySize {
         void saveFile(const unsigned char* buff, size_t size);
     public:
         SplitBySize(SplitOptions_p splitop);
+        ~SplitBySize();    
         void run();
 };
 

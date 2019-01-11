@@ -1,6 +1,7 @@
 # Makefile do módulo PdfHandler
 
 DEFS=-D_UNICODE -DUNICODE -D_WIN32_WINNT=0x0600
+DBGFLAGS=-ggdb -fno-inline -fno-omit-frame-pointer
 
 LDLIBS=-lqpdf
 

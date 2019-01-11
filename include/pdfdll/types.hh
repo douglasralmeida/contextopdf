@@ -7,7 +7,7 @@ typedef struct _SplitOptions_t {
     wchar_t* prefixout;
     bool forcereplace;
     bool delsource;
-    size_t maxsize;
+    unsigned long maxsize;
 } SplitOptions_t, *SplitOptions_p;
 
 #endif  //TYPES_H
