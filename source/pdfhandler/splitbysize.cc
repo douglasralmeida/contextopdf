@@ -14,10 +14,6 @@ SplitBySize::SplitBySize(SplitOptions_p splitop) {
     openPdf();
 }
 
-SplitBySize::~SplitBySize() {
-    delete &inpdf;
-}
-
 void SplitBySize::buildPdf(QPDF* pdf) {
     unsigned long filesize;
     Buffer* buffer;
@@ -67,14 +63,14 @@ void SplitBySize::removeLastPage(QPDF* pdf) {
 }
 
 void SplitBySize::run() {
-    int pageno;
-    std::vector<QPDFPageObjectHelper>::iterator iter;
     std::vector<QPDFPageObjectHelper> pages;
+    std::vector<QPDFPageObjectHelper>::iterator iter;
+    int pageno;
     unsigned long filesize;
 
     pages = QPDFPageDocumentHelper(inpdf).getAllPages();
-    iter = pages.begin();
-    while (true) {
+    inter = pages.begin();
+    while (iter != pages.end()) {
         QPDF outpdf;
 
         outpdf.emptyPDF();

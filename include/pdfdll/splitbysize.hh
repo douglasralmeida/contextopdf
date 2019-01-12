@@ -24,7 +24,6 @@ class SplitBySize {
         void saveFile(const unsigned char* buff, size_t size);
     public:
         SplitBySize(SplitOptions_p splitop);
-        ~SplitBySize();    
         void run();
 };
 
