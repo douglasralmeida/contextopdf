@@ -1,7 +1,7 @@
 # Makefile do módulo PdfHandler
 
 DEFS=-D_UNICODE -DUNICODE -D_WIN32_WINNT=0x0600
-CXXDBGFLAGS=-ggdb3 -fno-inline -fno-omit-frame-pointer
+CXXDBGFLAGS=-ggdb3 -fno-inline -fno-omit-frame-pointer -DBUILD_DLL
 
 LDLIBS=-lqpdf
 
@@ -15,7 +15,6 @@ OBJECTS=$(addprefix $(OBJDIR)/, $(OBJFILES))
 RESDIR=res
 
 CXXFLAGS=-fpic -c -Wall -Wextra -Wpedantic $(DEFS) -I$(INCDIR)/
-DBGFLAGS=-DBUILD_DLL
 LDFLAGS=-municode -shared -L$(LIBDIR)
 
 $(OBJDIR)/%.o: %.cc

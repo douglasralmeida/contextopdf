@@ -1,3 +1,4 @@
+#include <cmath>
 #include <cstdio>
 #include <fstream>
 #include <stdexcept>
@@ -10,8 +11,14 @@ SplitBySize::SplitBySize(SplitOptions_p splitop) {
     delsource = splitop->delsource;
     forcereplace = splitop->forcereplace;
     maxsize = splitop->maxsize * 1024;
+    usecallback = splitop->usecallback;
+    if (usecallback)
+        callbackproc = splitop->callbackproc;
+    else
+        callbackproc = NULL;
     pdfno = 0;
     openPdf();
+    getPageCount();
 }
 
 void SplitBySize::buildPdf(QPDF* pdf) {
@@ -25,6 +32,14 @@ void SplitBySize::buildPdf(QPDF* pdf) {
     buffer = outpdfw.getBuffer();
     filesize = buffer->getSize();
     saveFile(buffer->getBuffer(), filesize);
+}
+
+void SplitBySize::getPageCount() {
+    QPDFObjectHandle root = inpdf.getRoot();
+    QPDFObjectHandle pages = root.getKey("/Pages");
+    QPDFObjectHandle count = pages.getKey("/Count");
+
+    pagecount = count.getIntValue();
 }
 
 size_t SplitBySize::getPdfSize(QPDF* pdf) {
@@ -41,6 +56,7 @@ void SplitBySize::openPdf() {
     FILE* file;
     size_t length;
 
+    setStatus(L"pdf_opening", 0);
     if ((file = _wfopen(pdfinfile.c_str(), L"rb")) == NULL)
         throw std::runtime_error("file_notread");
     fseek (file, 0, SEEK_END);
@@ -68,8 +84,9 @@ void SplitBySize::run() {
     int pageno;
     unsigned long filesize;
 
+    setStatus(L"pdf_processing", 0);
     pages = QPDFPageDocumentHelper(inpdf).getAllPages();
-    inter = pages.begin();
+    iter = pages.begin();
     while (iter != pages.end()) {
         QPDF outpdf;
 
@@ -82,12 +99,14 @@ void SplitBySize::run() {
             pageno++;
             filesize = getPdfSize(&outpdf);
             iter++;
+            setStatus(L"pdf_processing", pageno);
             if (iter == pages.end())
                 break;
         }
         if (filesize >= maxsize) {
             removeLastPage(&outpdf);
-            if (--pageno > 0)
+            setStatus(L"pdf_processing", --pageno);
+            if (pageno > 0)
                 buildPdf(&outpdf);
             else
                 throw std::runtime_error("pdf_onepageoutofrange");
@@ -108,4 +127,13 @@ void SplitBySize::saveFile(unsigned char const* buff, size_t size) {
     if (fwrite((const char*)buff, sizeof(char), size, file) != size)
         throw std::runtime_error("file_notwrite");
     fclose(file);
+}
+
+void SplitBySize::setStatus(std::wstring status, int pageno) {
+    int pos;
+
+    if (usecallback && callbackproc) {
+        pos = ceil((double)pageno / pagecount) * 100;
+        (*callbackproc)(status.c_str(), pos);
+    }
 }
