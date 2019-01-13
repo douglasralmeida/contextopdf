@@ -11,11 +11,11 @@ SplitBySize::SplitBySize(SplitOptions_p splitop) {
     delsource = splitop->delsource;
     forcereplace = splitop->forcereplace;
     maxsize = splitop->maxsize * 1024;
-    usecallback = splitop->usecallback;
-    if (usecallback)
-        callbackproc = splitop->callbackproc;
+    catchprogress = splitop->catchprogress;
+    if (catchprogress)
+        progressproc = splitop->progressproc;
     else
-        callbackproc = NULL;
+        progressproc = NULL;
     pdfno = 0;
     openPdf();
     getPageCount();
@@ -32,6 +32,11 @@ void SplitBySize::buildPdf(QPDF* pdf) {
     buffer = outpdfw.getBuffer();
     filesize = buffer->getSize();
     saveFile(buffer->getBuffer(), filesize);
+}
+
+void SplitBySize::delSource() {
+    if (_wremove(pdfinfile.c_str()) != 0)
+        throw std::runtime_error("file_notdel");
 }
 
 void SplitBySize::getPageCount() {
@@ -89,7 +94,6 @@ void SplitBySize::run() {
     iter = pages.begin();
     while (iter != pages.end()) {
         QPDF outpdf;
-
         outpdf.emptyPDF();
         filesize = 0;
         pageno = 0;
@@ -115,6 +119,17 @@ void SplitBySize::run() {
         } else if (filesize > 0)
             buildPdf(&outpdf);
     }
+    if (delsource)
+        delSource();
+}
+
+inline bool file_exists(const std::wstring& name) {
+    if (FILE *file = _wfopen(name.c_str(), L"r")) {
+        fclose(file);
+        return true;
+    } else {
+        return false;
+    }   
 }
 
 void SplitBySize::saveFile(unsigned char const* buff, size_t size) {
@@ -122,6 +137,8 @@ void SplitBySize::saveFile(unsigned char const* buff, size_t size) {
     FILE* file;
 
     filename = dirout + prefixout + std::to_wstring(++pdfno) + L".pdf";
+    if (!forcereplace && file_exists(filename))
+        throw std::runtime_error("file_exists");
     if ((file = _wfopen(filename.c_str(), L"wb")) == NULL)
         throw std::runtime_error("file_notcreate");
     if (fwrite((const char*)buff, sizeof(char), size, file) != size)
@@ -132,8 +149,8 @@ void SplitBySize::saveFile(unsigned char const* buff, size_t size) {
 void SplitBySize::setStatus(std::wstring status, int pageno) {
     int pos;
 
-    if (usecallback && callbackproc) {
+    if (catchprogress && progressproc) {
         pos = ceil((double)pageno / pagecount) * 100;
-        (*callbackproc)(status.c_str(), pos);
+        (*progressproc)(status.c_str(), pos);
     }
 }

@@ -16,12 +16,13 @@ class SplitBySize {
         int pdfno;                              //number of pdf files generated
         bool forcereplace;                      //force pdf write
         unsigned long maxsize;                  //max pdf file size in bytes
-        bool usecallback;
-        callback_proc callbackproc;
+        bool catchprogress;
+        progress_proc_t progressproc;
         QPDF inpdf;
         long long pagecount;
         void openPdf();
         void buildPdf(QPDF* pdf);
+        void delSource();
         void getPageCount();
         size_t getPdfSize(QPDF* pdf);
         void removeLastPage(QPDF* pdf);
