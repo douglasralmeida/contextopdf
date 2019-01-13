@@ -93,7 +93,6 @@ object FormDividir: TFormDividir
     Top = 45
     Width = 275
     Height = 150
-    PageIndex = 1
     TabOrder = 2
     object TPage
       Left = 0

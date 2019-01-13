@@ -157,7 +157,13 @@
         <DCCReference Include="uProcessador.pas"/>
         <DCCReference Include="uShellMenu.pas"/>
         <DCCReference Include="uShellMenu_TLB.pas"/>
+        <DCCReference Include="uConfig.pas"/>
         <RidlCompile Include="uShellMenu.ridl"/>
+        <None Include="ContextoPDF.todo"/>
+        <RcItem Include="..\..\res\smallicon.bmp">
+            <ResourceType>BITMAP</ResourceType>
+            <ResourceId>MENUICON</ResourceId>
+        </RcItem>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

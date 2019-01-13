@@ -29,7 +29,7 @@ const
 
 implementation
 
-uses AnsiStrings, ComServ, Dialogs, frmDividir, Registry, ShellAPI;
+uses AnsiStrings, ComServ, Dialogs, frmDividir, Graphics, Registry, ShellAPI;
 
 //Função chamada quando o Windows Explorer está inicializando a extensão.
 function TShellMenu.Initialize(pidlFolder: PItemIDList;
@@ -71,9 +71,17 @@ function TShellMenu.QueryContextMenu(Menu: HMENU;
   indexMenu, idCmdFirst, idCmdLast, uFlags: UINT): HResult;
 const
   MENU_DIVIDIR = '&Dividir...';
+var
+  Bitmap: TBitmap;
 begin
   //adiciona um novo item ao menu de contexto
   InsertMenu(Menu, indexMenu, MF_STRING or MF_BYPOSITION, idCmdFirst, MENU_DIVIDIR);
+
+  //adiciona imagem ao item de menu
+  Bitmap := TBitmap.Create;
+  Bitmap.LoadFromResourceName(HInstance, 'MENUICON');
+  SetMenuItemBitmaps(Menu, idCmdFirst, MF_BITMAP or MF_BYCOMMAND, Bitmap.Handle, Bitmap.Handle);
+
   //returna o número de itens adicionados
   Result := 1;
 end;
