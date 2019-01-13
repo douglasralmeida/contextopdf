@@ -29,7 +29,7 @@ const
 
 implementation
 
-uses ComServ, Dialogs, frmDividir, Registry, ShellAPI, SysUtils;
+uses AnsiStrings, ComServ, Dialogs, frmDividir, Registry, ShellAPI;
 
 //Função chamada quando o Windows Explorer está inicializando a extensão.
 function TShellMenu.Initialize(pidlFolder: PItemIDList;

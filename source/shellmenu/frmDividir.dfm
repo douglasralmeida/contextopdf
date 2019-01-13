@@ -1,7 +1,6 @@
 object FormDividir: TFormDividir
   Left = 0
   Top = 0
-  ActiveControl = editTamanho
   BorderStyle = bsDialog
   Caption = 'Dividir PDF'
   ClientHeight = 242
@@ -94,13 +93,12 @@ object FormDividir: TFormDividir
     Top = 45
     Width = 275
     Height = 150
+    PageIndex = 1
     TabOrder = 2
     object TPage
       Left = 0
       Top = 0
       Caption = 'Inicial'
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label2: TLabel
         Left = 0
         Top = 0
@@ -166,8 +164,6 @@ object FormDividir: TFormDividir
       Left = 0
       Top = 0
       Caption = 'Andamento'
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label3: TLabel
         Left = 0
         Top = 0
@@ -183,7 +179,7 @@ object FormDividir: TFormDividir
         Alignment = taRightJustify
         Caption = 'status'
       end
-      object ProgressBar1: TProgressBar
+      object BarraProgresso: TProgressBar
         Left = 0
         Top = 21
         Width = 273

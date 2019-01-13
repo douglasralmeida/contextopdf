@@ -1,3 +1,4 @@
+
 unit frmDividir;
 
 interface
@@ -22,7 +23,7 @@ type
     checSubstituir: TCheckBox;
     checExcluirOrigem: TCheckBox;
     Label3: TLabel;
-    ProgressBar1: TProgressBar;
+    BarraProgresso: TProgressBar;
     txtStatus: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -31,6 +32,7 @@ type
   private
     nomearquivo: string;
     function ChecarForm: boolean;
+    procedure Finalizar;
     procedure IrParaStatus;
   public
     procedure SetNomeArquivo(Valor: String);
@@ -45,6 +47,13 @@ uses uAuxiliar, uProcessador;
 
 {$R *.dfm}
 
+procedure AlterarStatus(const Msg: PWideChar; Pos: Integer); stdcall;
+begin
+  FormDividir.BarraProgresso.Position := Pos;
+  FormDividir.txtStatus.Caption := Msg;
+  //Application.ProcessMessages;
+end;
+
 procedure TFormDividir.btoOKClick(Sender: TObject);
 var
   auxiliar: TDividirAuxiliar;
@@ -52,14 +61,18 @@ begin
   if ChecarForm then
   begin
     btoOK.Enabled := false;
-    auxiliar.tamanho := StrToFloat(editTamanho.Text);
+    auxiliar.tamanho := StrToUInt(editTamanho.Text);
     auxiliar.tipotamanho := TTipoTamanho(comboTipoTamanho.ItemIndex);
     auxiliar.arquivo := nomearquivo;
     auxiliar.salvarmesmolocal := checSalvarMesmoLocal.Checked;
     auxiliar.substituir := checSubstituir.Checked;
     auxiliar.excluirorigem := checExcluirOrigem.Checked;
+    auxiliar.callbackproc := @AlterarStatus;
     IrParaStatus;
-    ProcessarDivisao(auxiliar);
+    if ProcessarDivisao(auxiliar) then
+      Finalizar
+    else
+      Caderno.PageIndex := 0;
   end;
 end;
 
@@ -84,6 +97,13 @@ begin
   Result := true;
 end;
 
+procedure TFormDividir.Finalizar;
+begin
+  txtStatus.Caption := 'Divisão finalizada';
+  BarraProgresso.Position := 100;
+  ModalResult := mrOK;
+end;
+
 procedure TFormDividir.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   Action := caFree;
@@ -103,6 +123,7 @@ procedure TFormDividir.IrParaStatus;
 begin
   txtStatus.Caption := 'Inicializando divisão...';
   Caderno.PageIndex := 1;
+  Application.ProcessMessages;
 end;
 
 procedure TFormDividir.SetNomeArquivo(Valor: String);
