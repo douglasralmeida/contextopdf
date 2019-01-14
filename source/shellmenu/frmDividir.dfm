@@ -110,6 +110,7 @@ object FormDividir: TFormDividir
         Top = 23
         Width = 194
         Height = 23
+        NumbersOnly = True
         TabOrder = 0
       end
       object comboTipoTamanho: TComboBox

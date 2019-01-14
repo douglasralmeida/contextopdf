@@ -29,7 +29,8 @@ const
 
 implementation
 
-uses AnsiStrings, ComServ, Dialogs, frmDividir, Graphics, Registry, ShellAPI;
+uses AnsiStrings, ComServ, Dialogs, frmDividir, uConfig, Graphics,
+     Registry, ShellAPI, SysUtils, UITypes;
 
 //Função chamada quando o Windows Explorer está inicializando a extensão.
 function TShellMenu.Initialize(pidlFolder: PItemIDList;
@@ -88,6 +89,8 @@ end;
 
 //Função chamada quando o usuário clica no item do menu de contexto.
 function TShellMenu.InvokeCommand(var lpici: TCMInvokeCommandInfo): HResult;
+var
+  Config: TConfig;
 begin
   Result := NOERROR;
   // Garantir que InvokeCommand não foi chamada por uma aplicação
@@ -106,9 +109,26 @@ begin
   if LoWord(lpici.lpVerb) = 0 then
   begin
     //Abrir caixa de diálogo para divisão de pdf
-    FormDividir := TFormDividir.Create(nil);
-    FormDividir.SetNomeArquivo(NomeArquivo);
-    FormDividir.ShowModal;
+    try
+      Config := TConfig.Create;
+      Config.Carregar;
+      FormDividir := TFormDividir.Create(nil);
+      FormDividir.SetNomeArquivo(NomeArquivo);
+      FormDividir.SetConfig(Config);
+      FormDividir.ShowModal;
+      if FormDividir.ModalResult = mrOK then
+      begin
+        Config.Assign(FormDividir.GetConfig);
+        Config.Salvar;
+      end;
+    finally
+      if Assigned(FormDividir) then
+      begin
+        FormDividir.Release;
+        FreeAndNil(FormDividir);
+      end;
+      FreeAndNil(Config);
+    end;
   end;
 end;
 
@@ -121,7 +141,7 @@ begin
   if (idCmd = 0) and (uFlags = GCS_HELPTEXT) then
   begin
     // returna a cadeia de caracteres de ajuda do item de menu
-    strLCopy(pszName, AJUDA_DIVIDIR, cchMax);
+    AnsiStrings.strLCopy(pszName, AJUDA_DIVIDIR, cchMax);
     Result := NOERROR;
   end
   else

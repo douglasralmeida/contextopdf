@@ -1,3 +1,3 @@
 {TODO : Adicionar suporte a internacionalização.}
 {TODO : Implementar exibição de mensagens a partir dos códigos de exceção da DLL.}
-{TODO : Implementar carregar/salvar últimas opções utilizadas no registro.}
+{DONE : Implementar carregar/salvar últimas opções utilizadas no registro.}

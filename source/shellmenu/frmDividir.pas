@@ -6,7 +6,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ComCtrls,
-  Vcl.Imaging.pngimage;
+  Vcl.Imaging.pngimage, uConfig;
 
 type
   TFormDividir = class(TForm)
@@ -35,6 +35,8 @@ type
     procedure Finalizar;
     procedure IrParaStatus;
   public
+    function GetConfig: TConfig;
+    procedure SetConfig(Config: TConfig);
     procedure SetNomeArquivo(Valor: String);
   end;
 
@@ -72,14 +74,20 @@ begin
     if ProcessarDivisao(auxiliar) then
       Finalizar
     else
+    begin
+      btoOK.Enabled := true;
       Caderno.PageIndex := 0;
+      if editTamanho.CanFocus then
+        editTamanho.SetFocus;
+    end;
   end;
 end;
 
 function TFormDividir.ChecarForm: boolean;
 const
   MSG_TEXTOVAZIO = 'O tamanho máximo do arquivo PDF não foi informado. Digite o tamanho máximo antes de continuar.';
-  MSG_NAOEREAL = 'O tamanho máximo do informado não é um número real válido. Tente novamente.';
+  MSG_NAOEINT = 'O tamanho máximo do informado não é um número inteiro válido. Tente novamente.';
+  MSG_NAOEMAIORZERO = 'O tamanho máximo do informado não é um número inteiro válido. Tente novamente.';
 begin
   if Length(Trim(editTamanho.Text)) = 0 then
   begin
@@ -88,9 +96,15 @@ begin
     Exit(false);
   end;
   try
-    StrToFloat(editTamanho.Text);
+    StrToInt(editTamanho.Text);
   except
-    ExibirMensagemErro(MSG_NAOEREAL, 102);
+    ExibirMensagemErro(MSG_NAOEINT, 102);
+    editTamanho.SetFocus;
+    Exit(false);
+  end;
+  if StrToInt(editTamanho.Text) <= 0 then
+  begin
+    ExibirMensagemErro(MSG_NAOEMAIORZERO, 103);
     editTamanho.SetFocus;
     Exit(false);
   end;
@@ -119,12 +133,33 @@ begin
   Caption := 'Dividir PDF - ' + nomearquivo;
 end;
 
+function TFormDividir.GetConfig: TConfig;
+begin
+  Result := TConfig.Create;
+  Result.tamanho := StrToInt(editTamanho.text);
+  Result.tipo := comboTipoTamanho.ItemIndex;
+  Result.salvarmesmolocal := checSalvarMesmoLocal.checked;
+  Result.substituir := checSubstituir.checked;
+  Result.excluir := checExcluirOrigem.checked;
+end;
+
 procedure TFormDividir.IrParaStatus;
 begin
   txtStatus.Caption := 'Inicializando divisão...';
   Caderno.PageIndex := 1;
   Application.ProcessMessages;
 end;
+
+procedure TFormDividir.SetConfig(Config: TConfig);
+begin
+  if Config.tamanho > 0 then
+    editTamanho.text := IntToStr(Config.tamanho);
+  comboTipoTamanho.ItemIndex := Config.tipo;
+  checSalvarMesmoLocal.checked := Config.salvarmesmolocal;
+  checSubstituir.checked := Config.substituir;
+  checExcluirOrigem.checked := Config.excluir;
+end;
+
 
 procedure TFormDividir.SetNomeArquivo(Valor: String);
 begin

@@ -1,5 +1,7 @@
 library ContextoPDF;
 
+{$R *.dres}
+
 uses
   ComServ,
   Forms,
@@ -7,7 +9,8 @@ uses
   uAuxiliar in 'uAuxiliar.pas',
   uProcessador in 'uProcessador.pas',
   uShellMenu in 'uShellMenu.pas',
-  uShellMenu_TLB in 'uShellMenu_TLB.pas';
+  uShellMenu_TLB in 'uShellMenu_TLB.pas',
+  uConfig in 'uConfig.pas';
 
 exports
   DllGetClassObject,
