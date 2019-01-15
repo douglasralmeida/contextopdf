@@ -5,10 +5,7 @@ DEFS=-D_UNICODE -DUNICODE -D_WIN32_WINNT=0x0600
 LDLIBS=-lpdfhandler
 
 PROJECTNAME=pdfc
-BINDIR=../../bin
 INCDIR=../../include
-LIBDIR=../../lib
-OBJDIR=../../obj
 OBJFILES=pdfcli.o
 OBJECTS=$(addprefix $(OBJDIR)/, $(OBJFILES))
 RESDIR=res

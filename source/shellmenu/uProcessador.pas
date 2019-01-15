@@ -37,7 +37,10 @@ procedure splitBySize(sop: TSplitOptions); stdcall; external 'pdfhandler.dll' na
 implementation
 
 uses
-  FileCtrl, SysUtils, uAuxiliar;
+  {$WARN UNIT_PLATFORM OFF}
+  FileCtrl,
+  {$WARN UNIT_PLATFORM ON}
+  SysUtils, uAuxiliar;
 
 function GetDirectory(dirinicial: string): string;
 var

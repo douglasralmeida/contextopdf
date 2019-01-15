@@ -6,7 +6,7 @@ PROJS=pdfhandler cli
 
 #### Secao das regras ####
 %:
-	$(MAKE) -C $(SOURCEDIR)/$@
+	$(MAKE) -C $(SOURCEDIR)/$@ BINDIR=$(BINDIR)
 
 all: $(PROJS)
 

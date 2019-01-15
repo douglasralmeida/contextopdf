@@ -3,7 +3,7 @@
 #include "pdfdll/dllfunc.hh"
 #include "pdfdll/splitbysize.hh"
 
-__stdcall void splitBySize(SplitOptions_p splitop) {
+void __stdcall splitBySize(SplitOptions_p splitop) {
     try {
         SplitBySize sbs = SplitBySize(splitop);
         sbs.run();

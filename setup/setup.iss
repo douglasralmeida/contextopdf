@@ -34,16 +34,52 @@ VersionInfoProductVersion=1.0
 WizardImageFile=..\res\setupgrande.bmp
 WizardSmallImageFile=..\res\setuppequeno.bmp
 OutputDir=.\..\dist
+UsePreviousLanguage=False
+PrivilegesRequired=admin
 
 [Languages]
 Name: "brazilianportuguese"; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl"
 
 [Files]
-Source: "..\bin\qpdf21.dll"; DestDir: "{app}"; DestName: "qpdf21.dll"; Flags: ignoreversion
-Source: "..\bin\pdfhandler.dll"; DestDir: "{app}"; DestName: "pdfhandler.dll"; Flags: ignoreversion 64bit
-Source: "..\bin\pdfc.exe"; DestDir: "{app}"; DestName: "pdfc.exe"; Flags: ignoreversion 64bit
-Source: "..\bin\libwinpthread-1.dll"; DestDir: "{app}"; DestName: "libwinpthread-1.dll"; Flags: ignoreversion
-Source: "..\bin\libstdc++-6.dll"; DestDir: "{app}"; DestName: "libstdc++-6.dll"; Flags: ignoreversion
-Source: "..\bin\libgcc_s_seh-1.dll"; DestDir: "{app}"; DestName: "libgcc_s_seh-1.dll"; Flags: ignoreversion
-Source: "..\bin\ContextoPDF.dll"; DestDir: "{app}"; DestName: "ContextoPDF.dll"; Flags: ignoreversion 64bit regserver
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
+Source: "..\bin\x64\qpdf21.dll"; DestDir: "{app}"; DestName: "qpdf21.dll"; Flags: ignoreversion 64bit; Check: IsWin64
+Source: "..\bin\x64\pdfhandler.dll"; DestDir: "{app}"; DestName: "pdfhandler.dll"; Flags: ignoreversion 64bit; Check: IsWin64
+Source: "..\bin\x64\pdfc.exe"; DestDir: "{app}"; DestName: "pdfc.exe"; Flags: ignoreversion 64bit; Check: IsWin64
+Source: "..\bin\x64\libwinpthread-1.dll"; DestDir: "{app}"; DestName: "libwinpthread-1.dll"; Flags: ignoreversion 64bit; Check: IsWin64
+Source: "..\bin\x64\libstdc++-6.dll"; DestDir: "{app}"; DestName: "libstdc++-6.dll"; Flags: ignoreversion 64bit; Check: IsWin64
+Source: "..\bin\x64\libgcc_s_seh-1.dll"; DestDir: "{app}"; DestName: "libgcc_s_seh-1.dll"; Flags: ignoreversion 64bit; Check: IsWin64
+Source: "..\bin\x64\ContextoPDF.dll"; DestDir: "{app}"; DestName: "ContextoPDF.dll"; Flags: ignoreversion 64bit regserver noregerror restartreplace uninsrestartdelete; Check: IsWin64; BeforeInstall: DesregistrarDll64
+Source: "..\bin\x86\qpdf21.dll"; DestDir: "{app}"; DestName: "qpdf21.dll"; Flags: ignoreversion 32bit; Check: not IsWin64;
+Source: "..\bin\x86\pdfhandler.dll"; DestDir: "{app}"; DestName: "pdfhandler.dll"; Flags: ignoreversion 32bit; Check: not IsWin64;
+Source: "..\bin\x86\pdfc.exe"; DestDir: "{app}"; DestName: "pdfc.exe"; Flags: ignoreversion 32bit; Check: not IsWin64;
+Source: "..\bin\x86\libwinpthread-1.dll"; DestDir: "{app}"; DestName: "libwinpthread-1.dll"; Flags: ignoreversion 32bit; Check: not IsWin64;
+Source: "..\bin\x86\libstdc++-6.dll"; DestDir: "{app}"; DestName: "libstdc++-6.dll"; Flags: ignoreversion 32bit; Check: not IsWin64;
+Source: "..\bin\x86\libgcc_s_dw2-1.dll"; DestDir: "{app}"; DestName: "libgcc_s_dw2-1.dll"; Flags: ignoreversion 32bit; Check: not IsWin64;
+Source: "..\bin\x86\ContextoPDF.dll"; DestDir: "{app}"; DestName: "ContextoPDF.dll"; Flags: ignoreversion 32bit regserver noregerror restartreplace uninsrestartdelete; Check: not IsWin64; BeforeInstall: DesregistrarDll32
+
+[LangOptions]
+LanguageID=$0416
+DialogFontName=Segoe UI
+DialogFontSize=9
+WelcomeFontName=Segoe UI
+TitleFontName=Segoe UI
+CopyrightFontName=Segoe UI
+
+[Code]
+procedure DesregistrarDll32();
+begin
+  if FileExists(CurrentFileName) then
+  begin
+    UnregisterServer(False, CurrentFileName, False);
+    DeleteFile(CurrentFileName);
+  end;
+end;
+
+procedure DesregistrarDll64();
+begin
+  if FileExists(CurrentFileName) then
+  begin
+    UnregisterServer(True, CurrentFileName, False);
+    DeleteFile(CurrentFileName);
+  end;
+end;

@@ -126,8 +126,8 @@ procedure TConfig.Salvar;
 var
   Reg: TRegistry;
 begin
+  Reg := TRegistry.Create;
   try
-    Reg := TRegistry.Create;
     Reg.Access := KEY_WRITE;
     Reg.RootKey := HKEY_CURRENT_USER;
     Reg.OpenKey(chaveReg, true);

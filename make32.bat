@@ -1,9 +1,9 @@
-SET "TOOLCHAINDIR=D:\mingw64\bin"
-SET "BINDIR=../../bin/x64"
-SET "CXX=x86_64-w64-mingw32-g++"
-SET "LIBDIR=../../lib/x64"
+SET "TOOLCHAINDIR=D:\mingw32\bin"
+SET "BINDIR=../../bin/x86"
+SET "CXX=i686-w64-mingw32-g++"
+SET "LIBDIR=../../lib/x86"
 SET "MAKEEXE=%TOOLCHAINDIR%\mingw32-make.exe"
-SET "OBJDIR=../../obj/x64"
+SET "OBJDIR=../../obj/x86"
 SET "WRES=%TOOLCHAINDIR%\windres.exe -Iinclude/"
 
 %MAKEEXE% CXX=%CXX% WRES="%WRES%" BINDIR=%BINDIR% LIBDIR=%LIBDIR% OBJDIR=%OBJDIR%
