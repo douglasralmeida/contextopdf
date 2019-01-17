@@ -1,0 +1,150 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Condition="Exists('$(BDS)\bin\CodeGear.Deployment.targets')" Project="$(BDS)\bin\CodeGear.Deployment.targets"/>
+    <ProjectExtensions>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <PropertyGroup/>
+    <ItemGroup Condition="'$(Platform)'=='Win32'">
+        <DeployFile Include="..\..\bin\x86\ContextoPDF.dll" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>ContextoPDF\</RemoteDir>
+            <RemoteName>ContextoPDF.dll</RemoteName>
+            <DeployClass>ProjectOutput</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+            <Required>True</Required>
+        </DeployFile>
+        <DeployFile Include="..\..\bin\x86\ContextoPDF.dll" Condition="'$(Config)'=='Release'">
+            <RemoteDir>ContextoPDF\</RemoteDir>
+            <RemoteName>ContextoPDF.dll</RemoteName>
+            <DeployClass>ProjectOutput</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+            <Required>True</Required>
+        </DeployFile>
+        <DeployFile Include="..\..\bin\x86\libgcc_s_dw2-1.dll" Condition="'$(Config)'=='Release'">
+            <RemoteDir>ContextoPDF\</RemoteDir>
+            <RemoteName>libgcc_s_dw2-1.dll</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\..\bin\x86\libstdc++-6.dll" Condition="'$(Config)'=='Release'">
+            <RemoteDir>ContextoPDF\</RemoteDir>
+            <RemoteName>libstdc++-6.dll</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\..\bin\x86\libwinpthread-1.dll" Condition="'$(Config)'=='Release'">
+            <RemoteDir>ContextoPDF\</RemoteDir>
+            <RemoteName>libwinpthread-1.dll</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\..\bin\x86\qpdf21.dll" Condition="'$(Config)'=='Release'">
+            <RemoteDir>ContextoPDF\</RemoteDir>
+            <RemoteName>qpdf21.dll</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\..\bin\x86\qpdf21.dll" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>ContextoPDF\</RemoteDir>
+            <RemoteName>qpdf21.dll</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\..\bin\x86\pdfhandler.dll" Condition="'$(Config)'=='Release'">
+            <RemoteDir>ContextoPDF\</RemoteDir>
+            <RemoteName>pdfhandler.dll</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\..\bin\x86\libwinpthread-1.dll" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>ContextoPDF\</RemoteDir>
+            <RemoteName>libwinpthread-1.dll</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\..\bin\x86\libgcc_s_dw2-1.dll" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>ContextoPDF\</RemoteDir>
+            <RemoteName>libgcc_s_dw2-1.dll</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\..\bin\x86\pdfhandler.dll" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>ContextoPDF\</RemoteDir>
+            <RemoteName>pdfhandler.dll</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\..\bin\x86\libstdc++-6.dll" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>ContextoPDF\</RemoteDir>
+            <RemoteName>libstdc++-6.dll</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+    </ItemGroup>
+    <ItemGroup Condition="'$(Platform)'=='Win64'">
+        <DeployFile Include="..\..\bin\x86\ContextoPDF.dll" Condition="'$(Config)'=='Release'">
+            <RemoteDir>ContextoPDF\</RemoteDir>
+            <RemoteName>ContextoPDF.dll</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="..\..\bin\x64\ContextoPDF.dll" Condition="'$(Config)'=='Release'">
+            <RemoteDir>ContextoPDF\</RemoteDir>
+            <RemoteName>ContextoPDF.dll</RemoteName>
+            <DeployClass>ProjectOutput</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+            <Required>True</Required>
+        </DeployFile>
+        <DeployFile Include="..\..\bin\ContextoPDF.dll" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>ContextoPDF\</RemoteDir>
+            <RemoteName>ContextoPDF.dll</RemoteName>
+            <DeployClass>ProjectOutput</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+            <Required>True</Required>
+        </DeployFile>
+    </ItemGroup>
+</Project>

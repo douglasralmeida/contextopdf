@@ -48,17 +48,16 @@ Source: "..\bin\x64\pdfc.exe"; DestDir: "{app}"; DestName: "pdfc.exe"; Flags: ig
 Source: "..\bin\x64\libwinpthread-1.dll"; DestDir: "{app}"; DestName: "libwinpthread-1.dll"; Flags: ignoreversion 64bit; Check: IsWin64
 Source: "..\bin\x64\libstdc++-6.dll"; DestDir: "{app}"; DestName: "libstdc++-6.dll"; Flags: ignoreversion 64bit; Check: IsWin64
 Source: "..\bin\x64\libgcc_s_seh-1.dll"; DestDir: "{app}"; DestName: "libgcc_s_seh-1.dll"; Flags: ignoreversion 64bit; Check: IsWin64
-Source: "..\bin\x64\ContextoPDF.dll"; DestDir: "{app}"; DestName: "ContextoPDF.dll"; Flags: ignoreversion 64bit regserver noregerror restartreplace uninsrestartdelete; Check: IsWin64; BeforeInstall: DesregistrarDll64
+Source: "..\bin\x64\ContextoPDF.dll"; DestDir: "{app}"; DestName: "ContextoPDF.dll"; Flags: ignoreversion 64bit regserver noregerror restartreplace uninsrestartdelete; Check: IsWin64; BeforeInstall: DesregistrarDll(true)
 Source: "..\bin\x86\qpdf21.dll"; DestDir: "{app}"; DestName: "qpdf21.dll"; Flags: ignoreversion 32bit; Check: not IsWin64;
 Source: "..\bin\x86\pdfhandler.dll"; DestDir: "{app}"; DestName: "pdfhandler.dll"; Flags: ignoreversion 32bit; Check: not IsWin64;
 Source: "..\bin\x86\pdfc.exe"; DestDir: "{app}"; DestName: "pdfc.exe"; Flags: ignoreversion 32bit; Check: not IsWin64;
 Source: "..\bin\x86\libwinpthread-1.dll"; DestDir: "{app}"; DestName: "libwinpthread-1.dll"; Flags: ignoreversion 32bit; Check: not IsWin64;
 Source: "..\bin\x86\libstdc++-6.dll"; DestDir: "{app}"; DestName: "libstdc++-6.dll"; Flags: ignoreversion 32bit; Check: not IsWin64;
 Source: "..\bin\x86\libgcc_s_dw2-1.dll"; DestDir: "{app}"; DestName: "libgcc_s_dw2-1.dll"; Flags: ignoreversion 32bit; Check: not IsWin64;
-Source: "..\bin\x86\ContextoPDF.dll"; DestDir: "{app}"; DestName: "ContextoPDF.dll"; Flags: ignoreversion 32bit regserver noregerror restartreplace uninsrestartdelete; Check: not IsWin64; BeforeInstall: DesregistrarDll32
+Source: "..\bin\x86\ContextoPDF.dll"; DestDir: "{app}"; DestName: "ContextoPDF.dll"; Flags: ignoreversion 32bit regserver noregerror restartreplace uninsrestartdelete; Check: not IsWin64; BeforeInstall: DesregistrarDll(false)
 
 [LangOptions]
-LanguageID=$0416
 DialogFontName=Segoe UI
 DialogFontSize=9
 WelcomeFontName=Segoe UI
@@ -66,20 +65,11 @@ TitleFontName=Segoe UI
 CopyrightFontName=Segoe UI
 
 [Code]
-procedure DesregistrarDll32();
+procedure DesregistrarDll(Is64: boolean);
 begin
   if FileExists(CurrentFileName) then
   begin
-    UnregisterServer(False, CurrentFileName, False);
-    DeleteFile(CurrentFileName);
-  end;
-end;
-
-procedure DesregistrarDll64();
-begin
-  if FileExists(CurrentFileName) then
-  begin
-    UnregisterServer(True, CurrentFileName, False);
+    UnregisterServer(Is64, CurrentFileName, False);
     DeleteFile(CurrentFileName);
   end;
 end;

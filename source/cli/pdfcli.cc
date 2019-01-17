@@ -2,7 +2,7 @@
 #include <iostream>
 #include <stdio.h>
 
-void __stdcall exibirmsg(const char* msg) {
+void __cdecl exibirmsg(const char* msg) {
     std::cerr << "pdfcli error: " << msg << std::endl;
 }
 

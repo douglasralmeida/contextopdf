@@ -1,9 +1,9 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-typedef void (__stdcall *progress_proc_t)(const wchar_t*, int);
+typedef void (__cdecl *progress_proc_t)(const wchar_t*, int);
 
-typedef void (__stdcall *msg_proc_t)(const char*);
+typedef void (__cdecl *msg_proc_t)(const char*);
 
 typedef struct _SplitOptions_t {
     wchar_t* filein;

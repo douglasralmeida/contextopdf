@@ -7,7 +7,6 @@ uses
 
 type
   TTipoTamanho = (ttKB, ttMB);
-  TStatusProc = procedure(Str: PWideChar; Pos: Integer); stdcall;
   TDividirAuxiliar = record
     tamanho: Cardinal;
     tipotamanho: TTipoTamanho;
@@ -21,18 +20,18 @@ type
     filein: PWideChar;
     dirout: PWideChar;
     prefixout: PWideChar;
-    forcereplace: boolean;
-    delsource: boolean;
+    forcereplace: WordBool;
+    delsource: WordBool;
     maxsize: Cardinal;
-    catchprogress: boolean;
-    success: boolean;
+    catchprogress: WordBool;
+    success: WordBool;
     progressproc: TFarProc;
     msgproc: TFarProc;
   end;
 
 function ProcessarDivisao(Parametros: TDividirAuxiliar): boolean;
 
-procedure splitBySize(sop: TSplitOptions); stdcall; external 'pdfhandler.dll' name 'splitBySize';
+procedure splitBySize(sop: TSplitOptions); cdecl; external 'pdfhandler.dll';
 
 implementation
 
@@ -52,7 +51,7 @@ begin
     result := ''
 end;
 
-procedure ExibirMsg(const Msg: PAnsiChar); stdcall;
+procedure ExibirMsg(const Msg: PAnsiChar); cdecl;
 begin
   ExibirMensagemErro(WideString(Msg), 100);
 end;

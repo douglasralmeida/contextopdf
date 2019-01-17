@@ -14,7 +14,7 @@ extern "C" {
 #define FUNC_DLL __declspec(dllimport)
 #endif
 
-void __stdcall FUNC_DLL splitBySize(SplitOptions_p splitop);
+void __cdecl FUNC_DLL splitBySize(SplitOptions_p splitop);
 
 #ifdef __cplusplus
 }

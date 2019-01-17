@@ -49,11 +49,10 @@ uses uAuxiliar, uProcessador;
 
 {$R *.dfm}
 
-procedure AlterarStatus(const Msg: PWideChar; Pos: Integer); stdcall;
+procedure AlterarStatus(const Msg: PWideChar; Pos: Integer); cdecl;
 begin
   FormDividir.BarraProgresso.Position := Pos;
   FormDividir.txtStatus.Caption := Msg;
-  //Application.ProcessMessages;
 end;
 
 procedure TFormDividir.btoOKClick(Sender: TObject);
