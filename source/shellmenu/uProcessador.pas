@@ -28,10 +28,11 @@ type
     progressproc: TFarProc;
     msgproc: TFarProc;
   end;
+  PSplitOptions = ^TSplitOptions;
 
 function ProcessarDivisao(Parametros: TDividirAuxiliar): boolean;
 
-procedure splitBySize(sop: TSplitOptions); cdecl; external 'pdfhandler.dll';
+procedure splitBySize(sop: PSplitOptions); cdecl; external 'pdfhandler.dll';
 
 implementation
 
@@ -81,7 +82,7 @@ begin
   sop.catchprogress := Assigned(parametros.callbackproc);
   sop.progressproc := parametros.callbackproc;
   sop.msgproc := @ExibirMsg;
-  splitBySize(sop);
+  splitBySize(@sop);
   Result := sop.success;
 end;
 
