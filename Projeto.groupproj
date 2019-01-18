@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{7581BE98-5CFE-45A2-A8A9-D533EF074C2B}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="source\shellmenu\ContextoPDF.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="source\testdll\TesteDll.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ContextoPDF">
+        <MSBuild Projects="source\shellmenu\ContextoPDF.dproj"/>
+    </Target>
+    <Target Name="ContextoPDF:Clean">
+        <MSBuild Projects="source\shellmenu\ContextoPDF.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ContextoPDF:Make">
+        <MSBuild Projects="source\shellmenu\ContextoPDF.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TesteDll">
+        <MSBuild Projects="source\testdll\TesteDll.dproj"/>
+    </Target>
+    <Target Name="TesteDll:Clean">
+        <MSBuild Projects="source\testdll\TesteDll.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TesteDll:Make">
+        <MSBuild Projects="source\testdll\TesteDll.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ContextoPDF;TesteDll"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ContextoPDF:Clean;TesteDll:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ContextoPDF:Make;TesteDll:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
