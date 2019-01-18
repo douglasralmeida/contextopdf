@@ -5,7 +5,7 @@
         <FrameworkType>VCL</FrameworkType>
         <MainSource>ContextoPDF.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win64</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Library</AppType>
@@ -71,9 +71,9 @@
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
         <SanitizedProjectName>ContextoPDF</SanitizedProjectName>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Build>101</VerInfo_Build>
+        <VerInfo_Build>103</VerInfo_Build>
         <VerInfo_Locale>1046</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=Douglas R. Almeida;FileDescription=$(MSBuildProjectName) Library;FileVersion=1.0.0.101;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=pes.douglasralmeida.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=Douglas R. Almeida;FileDescription=$(MSBuildProjectName) Library;FileVersion=1.0.0.103;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=pes.douglasralmeida.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0;Comments=</VerInfo_Keys>
         <BRCC_OutputDir>.\..\..\res</BRCC_OutputDir>
         <DCC_Description>Biblioteca do ContextoPDF</DCC_Description>
         <VerInfo_Debug>true</VerInfo_Debug>
@@ -95,12 +95,11 @@
         <DCC_UsePackage>DBXSqliteDriver;IndyIPCommon;bindcompdbx;DBXInterBaseDriver;vcl;IndyIPServer;vclactnband;vclFireDAC;IndySystem;tethering;dsnapcon;FireDACADSDriver;FireDACMSAccDriver;fmxFireDAC;vclimg;TeeDB;vcltouch;vcldb;bindcompfmx;FireDACPgDriver;inetdb;FMXTee;DbxCommonDriver;FmxTeeUI;fmx;fmxdae;xmlrtl;Tee;fmxobj;vclwinx;rtl;DbxClientDriver;CustomIPTransport;vcldsnap;dbexpress;IndyCore;vclx;bindcomp;appanalytics;dsnap;IndyIPClient;bindcompvcl;TeeUI;VCLRESTComponents;dbxcds;VclSmp;adortl;vclie;bindengine;DBXMySQLDriver;dsnapxml;FireDACMySQLDriver;dbrtl;IndyProtocols;inetdbxpress;FireDACCommonODBC;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
         <BT_BuildType>Debug</BT_BuildType>
-        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.102;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-        <Debugger_HostApplication>C:\Windows\notepad.exe</Debugger_HostApplication>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.103;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <Debugger_HostApplication>.\..\..\bin\x64\TesteDll.exe</Debugger_HostApplication>
         <Manifest_File>(None)</Manifest_File>
         <DCC_ExeOutput>.\..\..\bin\x64</DCC_ExeOutput>
         <DCC_DcuOutput>.\..\..\obj\x64\$(Config)</DCC_DcuOutput>
-        <VerInfo_Build>102</VerInfo_Build>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
@@ -111,11 +110,12 @@
         <DCC_RemoteDebug>true</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.101;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.103;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
-        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.101;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName) 1.0;ProductVersion=1.0.0;Comments=</VerInfo_Keys>
-        <Debugger_HostApplication>C:\Windows\notepad.exe</Debugger_HostApplication>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.103;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName) 1.0;ProductVersion=1.0.0;Comments=</VerInfo_Keys>
+        <Debugger_HostApplication>C:\Users\Douglas\Documents\GitHub\contextopdf\bin\x64\TesteDll.exe</Debugger_HostApplication>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -124,11 +124,13 @@
         <DCC_DebugInformation>0</DCC_DebugInformation>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.101;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName) 1.0;ProductVersion=1.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.103;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName) 1.0;ProductVersion=1.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.101;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName) 1.0;ProductVersion=1.0.0;Comments=</VerInfo_Keys>
         <DCC_DcuOutput>.\obj\$(Platform)\$(Config)</DCC_DcuOutput>
+        <Debugger_HostApplication>TesteDll.exe</Debugger_HostApplication>
+        <VerInfo_Build>101</VerInfo_Build>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
@@ -145,9 +147,9 @@
         <DCCReference Include="uConfig.pas"/>
         <RidlCompile Include="uShellMenu.ridl"/>
         <None Include="ContextoPDF.todo"/>
-        <RcItem Include="..\..\res\smallicon.bmp">
-            <ResourceType>BITMAP</ResourceType>
-            <ResourceId>MENUICON</ResourceId>
+        <RcItem Include="..\..\res\smallpdficon.ico">
+            <ResourceType>ICON</ResourceType>
+            <ResourceId>PDFICON</ResourceId>
         </RcItem>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
@@ -251,6 +253,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="..\..\bin\x64\ContextoPDF.dll" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win64">
+                        <RemoteName>ContextoPDF.dll</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="..\..\bin\x86\pdfhandler.dll" Configuration="Debug" Class="File">
                     <Platform Name="Win32">
                         <RemoteName>pdfhandler.dll</RemoteName>
@@ -260,12 +268,6 @@
                 <DeployFile LocalName="..\..\bin\x86\libstdc++-6.dll" Configuration="Debug" Class="File">
                     <Platform Name="Win32">
                         <RemoteName>libstdc++-6.dll</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="..\..\bin\ContextoPDF.dll" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win64">
-                        <RemoteName>ContextoPDF.dll</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

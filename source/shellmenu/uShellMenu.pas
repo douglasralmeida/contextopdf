@@ -71,17 +71,32 @@ end;
 function TShellMenu.QueryContextMenu(Menu: HMENU;
   indexMenu, idCmdFirst, idCmdLast, uFlags: UINT): HResult;
 const
-  MENU_DIVIDIR = '&Dividir...';
+  MENU_DIVIDIR = '&Dividir por tamanho...';
 var
   Bitmap: TBitmap;
+  Icon: TIcon;
+  MenuItemInfo: TMenuItemInfo;
 begin
   //adiciona um novo item ao menu de contexto
   InsertMenu(Menu, indexMenu, MF_STRING or MF_BYPOSITION, idCmdFirst, MENU_DIVIDIR);
 
   //adiciona imagem ao item de menu
   Bitmap := TBitmap.Create;
-  Bitmap.LoadFromResourceName(HInstance, 'MENUICON');
-  SetMenuItemBitmaps(Menu, idCmdFirst, MF_BITMAP or MF_BYCOMMAND, Bitmap.Handle, Bitmap.Handle);
+  Icon := TIcon.Create;
+  try
+    Bitmap.Height := 16;
+    Bitmap.Width := 16;
+    Icon.LoadFromResourceName(HInstance, 'PDFICON');
+    DrawIconEx(Bitmap.Canvas.Handle, 0, 0, Icon.Handle, Bitmap.Width, Bitmap.Height, 0, GetSysColorBrush(COLOR_MENU), DI_NORMAL);
+    ZeroMemory(@MenuItemInfo, SizeOf(MenuItemInfo));
+    MenuItemInfo.fMask := MIIM_BITMAP;
+    MenuItemInfo.hbmpItem := Bitmap.Handle;
+    MenuItemInfo.cbSize := sizeof(MenuItemInfo);
+    SetMenuItemInfo(Menu, idCmdFirst, false, MenuItemInfo);
+  finally
+    if Assigned(Icon) then
+      FreeAndNil(Icon);
+  end;
 
   //returna o número de itens adicionados
   Result := 1;
@@ -109,10 +124,10 @@ begin
   if LoWord(lpici.lpVerb) = 0 then
   begin
     //Abrir caixa de diálogo para divisão de pdf
+    FormDividir := TFormDividir.Create(nil);
+    Config := TConfig.Create;
     try
-      Config := TConfig.Create;
       Config.Carregar;
-      FormDividir := TFormDividir.Create(nil);
       FormDividir.SetNomeArquivo(NomeArquivo);
       FormDividir.SetConfig(Config);
       FormDividir.ShowModal;
@@ -122,12 +137,13 @@ begin
         Config.Salvar;
       end;
     finally
+      if Assigned(Config) then
+        FreeAndNil(Config);
       if Assigned(FormDividir) then
       begin
         FormDividir.Release;
         FreeAndNil(FormDividir);
       end;
-      FreeAndNil(Config);
     end;
   end;
 end;

@@ -162,7 +162,7 @@ end;
 
 procedure TFormDividir.SetNomeArquivo(Valor: String);
 begin
-  nomearquivo := Valor;
+  nomearquivo := ExtractFileName(Valor);
 end;
 
 end.
