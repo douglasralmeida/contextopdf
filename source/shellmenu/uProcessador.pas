@@ -3,7 +3,7 @@ unit uProcessador;
 interface
 
 uses
-  Windows;
+  Winapi.Windows;
 
 type
   TTipoTamanho = (ttKB, ttMB);
@@ -38,9 +38,9 @@ implementation
 
 uses
   {$WARN UNIT_PLATFORM OFF}
-  FileCtrl,
+  Vcl.FileCtrl,
   {$WARN UNIT_PLATFORM ON}
-  SysUtils, uAuxiliar;
+  System.SysUtils, uAuxiliar;
 
 function GetDirectory(dirinicial: string): string;
 var
@@ -71,6 +71,7 @@ begin
       exit(false);
   end;
   prefixo := ExtrairArquivoPrefixo(ExtractFileName(parametros.arquivo));
+  sop.success := false;
   sop.filein := PWideChar(parametros.arquivo);
   sop.dirout := PWideChar(dirsaida);
   sop.prefixout := PWideChar(prefixo);

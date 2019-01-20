@@ -3,7 +3,7 @@ unit uConfig;
 interface
 
 uses
-  Classes;
+  System.Classes;
 
 type
   TConfig = class(TPersistent)
@@ -38,7 +38,7 @@ type
 implementation
 
 uses
-  Registry, Windows, Dialogs;
+  System.Win.Registry, Winapi.Windows, Vcl.Dialogs;
 
 const
   chaveReg = 'Software\\Douglas R. Almeida\\ContextoPDF\\';

@@ -129,7 +129,7 @@ end;
 
 procedure TFormDividir.FormShow(Sender: TObject);
 begin
-  Caption := 'Dividir PDF - ' + nomearquivo;
+  Caption := 'Dividir PDF - ' + ExtractFileName(nomearquivo);
 end;
 
 function TFormDividir.GetConfig: TConfig;
@@ -141,6 +141,7 @@ begin
   Result.substituir := checSubstituir.checked;
   Result.excluir := checExcluirOrigem.checked;
 end;
+
 
 procedure TFormDividir.IrParaStatus;
 begin
@@ -162,7 +163,7 @@ end;
 
 procedure TFormDividir.SetNomeArquivo(Valor: String);
 begin
-  nomearquivo := ExtractFileName(Valor);
+  nomearquivo := Valor;
 end;
 
 end.

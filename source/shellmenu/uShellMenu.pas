@@ -3,7 +3,7 @@ unit uShellMenu;
 interface
 
 uses
-  Windows, ActiveX, ComObj, ShlObj;
+  Winapi.Windows, Winapi.ActiveX, System.Win.ComObj, Winapi.ShlObj;
 
 type
   TShellMenu = class(TComObject, IUnknown, IContextMenu, IShellExtInit)
@@ -29,8 +29,9 @@ const
 
 implementation
 
-uses AnsiStrings, ComServ, Dialogs, frmDividir, uConfig, Graphics,
-     Registry, ShellAPI, SysUtils, UITypes;
+uses System.AnsiStrings, System.Win.ComServ, Vcl.Dialogs,
+     frmDividir, uConfig, Vcl.Graphics,
+     System.Win.Registry, Winapi.ShellAPI, System.SysUtils, System.UITypes;
 
 //Função chamada quando o Windows Explorer está inicializando a extensão.
 function TShellMenu.Initialize(pidlFolder: PItemIDList;
@@ -157,7 +158,7 @@ begin
   if (idCmd = 0) and (uFlags = GCS_HELPTEXT) then
   begin
     // returna a cadeia de caracteres de ajuda do item de menu
-    AnsiStrings.strLCopy(pszName, AJUDA_DIVIDIR, cchMax);
+    System.AnsiStrings.strLCopy(pszName, AJUDA_DIVIDIR, cchMax);
     Result := NOERROR;
   end
   else

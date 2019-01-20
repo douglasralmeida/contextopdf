@@ -1,14 +1,10 @@
 library ContextoPDF;
 
-
-
-
-
 {$R *.dres}
 
 uses
-  ComServ,
-  Forms,
+  System.Win.ComServ,
+  Vcl.Forms,
   frmDividir in 'frmDividir.pas' {FormDividir},
   uAuxiliar in 'uAuxiliar.pas',
   uProcessador in 'uProcessador.pas',

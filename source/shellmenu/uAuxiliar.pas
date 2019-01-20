@@ -8,7 +8,7 @@ function ExtrairArquivoPrefixo(const FileName: string): string;
 implementation
 
 uses
-  Dialogs, SysUtils, UITypes;
+  Vcl.Dialogs, System.SysUtils, System.UITypes;
 
 procedure ExibirMensagemErro(conteudo: string; ajudaid: integer);
 begin

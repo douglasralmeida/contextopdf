@@ -1,20 +1,23 @@
-; Script para o instalador do ContextoPDF
+﻿; Script para o instalador do ContextoPDF
 ; requer InnoSetup
 
-#define MyAppName "ContextoPDF"
-#define MyAppVersion "1.0.0"
-#define MyAppPublisher "Douglas R. Almeida"
-#define MyAppURL "https://github.com/douglasralmeida"
+#include "ambiente.iss"
+
+#define AppName "ContextoPDF beta 1"
+#define AppVersion "1.0.0"
+#define AppPublisher "Douglas R. Almeida"
+#define AppPublisherURL "https://github.com/douglasralmeida"
+#define AppURL "https://github.com/douglasralmeida/contextopdf"
 
 [Setup]
 AppId={{99335ABF-8E8D-4836-B64D-F0984A662096}
-AppName={#MyAppName}
-AppVersion={#MyAppVersion}
-;AppVerName={#MyAppName} {#MyAppVersion}
-AppPublisher={#MyAppPublisher}
-AppPublisherURL={#MyAppURL}
-AppSupportURL={#MyAppURL}
-AppUpdatesURL={#MyAppURL}
+AppName={#AppName}
+AppVersion={#AppVersion}
+;AppVerName={#AppName} {#MppVersion}
+AppPublisher={#AppPublisher}
+AppPublisherURL={#AppPublisherURL}
+AppSupportURL={#AppURL}
+AppUpdatesURL={#AppURL}
 AllowNoIcons=yes
 ArchitecturesInstallIn64BitMode=x64
 ChangesEnvironment=true
@@ -39,6 +42,7 @@ PrivilegesRequired=admin
 
 [Languages]
 Name: "brazilianportuguese"; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl"
+Name: "en"; MessagesFile: "compiler:Default.isl"
 
 [Files]
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
@@ -72,4 +76,16 @@ begin
     UnregisterServer(Is64, CurrentFileName, False);
     DeleteFile(CurrentFileName);
   end;
+end;
+
+procedure CurStepChanged(CurStep: TSetupStep);
+begin
+  if CurStep = ssPostInstall then
+    EnvAddPath(ExpandConstant('{app}'));
+end;
+
+procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
+begin
+  if CurUninstallStep = usPostUninstall then
+    EnvRemovePath(ExpandConstant('{app}'));
 end;
