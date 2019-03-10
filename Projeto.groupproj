@@ -9,6 +9,9 @@
         <Projects Include="source\testdll\TesteDll.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="source\splitbysize.ui\splitbysize.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -35,14 +38,23 @@
     <Target Name="TesteDll:Make">
         <MSBuild Projects="source\testdll\TesteDll.dproj" Targets="Make"/>
     </Target>
+    <Target Name="splitbysize">
+        <MSBuild Projects="source\splitbysize.ui\splitbysize.dproj"/>
+    </Target>
+    <Target Name="splitbysize:Clean">
+        <MSBuild Projects="source\splitbysize.ui\splitbysize.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="splitbysize:Make">
+        <MSBuild Projects="source\splitbysize.ui\splitbysize.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="ContextoPDF;TesteDll"/>
+        <CallTarget Targets="ContextoPDF;TesteDll;splitbysize"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="ContextoPDF:Clean;TesteDll:Clean"/>
+        <CallTarget Targets="ContextoPDF:Clean;TesteDll:Clean;splitbysize:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="ContextoPDF:Make;TesteDll:Make"/>
+        <CallTarget Targets="ContextoPDF:Make;TesteDll:Make;splitbysize:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

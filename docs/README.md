@@ -1,0 +1,2 @@
+Unistall Icon - Windows 8 Metro Icons[http://www.iconarchive.com/show/windows-8-metro-icons-by-dakirby309.html] by dAKirby309
+Setup Icon - Modern XP Icons[http://www.iconarchive.com/show/modern-xp-icons-by-dtafalonso.html] by dtafalonso

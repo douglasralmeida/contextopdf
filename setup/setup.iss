@@ -3,7 +3,7 @@
 
 #include "ambiente.iss"
 
-#define AppName "ContextoPDF beta 1"
+#define AppName "ContextoPDF beta 2"
 #define AppVersion "1.0.0"
 #define AppPublisher "Douglas R. Almeida"
 #define AppPublisherURL "https://github.com/douglasralmeida"
@@ -31,7 +31,7 @@ SetupIconFile=..\res\setup.ico
 SolidCompression=yes
 ShowLanguageDialog=yes
 UninstallDisplayName=ContextoPDF
-UninstallDisplayIcon={uninstallexe}
+UninstallDisplayIcon=..\res\uninstall.ico
 VersionInfoVersion=1.0.0
 VersionInfoProductVersion=1.0
 WizardImageFile=..\res\setupgrande.bmp

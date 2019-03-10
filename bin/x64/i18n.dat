@@ -1,0 +1,13 @@
+BTO_CANCEL=Cancelar
+BTO_OK=OK
+SPLITBYSIZE_CAPTION=Dividir PDF por tamanho - %s
+SPLITBYSIZE_SUBTITLE=Dividir arquivo PDF por tamanho
+SPLITBYSIZE_TYPESIZE=&Digite o tamanho máximodo arquivo PDF:
+SPLITBYSIZE_SAVE=&Salvar no mesmo local do arquivo de origem
+SPLITBYSIZE_REPLACE=S&ubstituir, caso exista arquivo com mesmo nome que o arquivo de destino
+SPLITBYSIZE_DELETE=&Excluir arquivo de origem
+SPLITBYSIZE_WAIT=Aguarde enquanto o arquivo PDF é processado...
+SPLITBYSIZE_STARTING=Iniciando divisão...
+SPLITBYSIZE_DONE=Divisão finalizada.
+SPLITBYSIZE_MAXSIZEEMPTY=O tamanho máximo do arquivo PDF não foi informado. Digite o tamanho máximo antes de continuar.
+SPLITBYSIZE_MAXSIZEINVALID=O tamanho máximo informado não é um número inteiro positivo válido. Tente novamente.

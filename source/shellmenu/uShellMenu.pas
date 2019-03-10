@@ -8,7 +8,7 @@ uses
 type
   TShellMenu = class(TComObject, IUnknown, IContextMenu, IShellExtInit)
   private
-    nomearquivo: string;
+    nomearquivo: string;              c
   protected
     function QueryContextMenu(Menu: HMENU; indexMenu, idCmdFirst, idCmdLast,
       uFlags: UINT): HResult; stdcall;
@@ -17,6 +17,8 @@ type
       pszName: LPSTR; cchMax: UINT): HResult; stdcall;
     function Initialize(pidlFolder: PItemIDList; lpdobj: IDataObject;
       hKeyProgID: HKEY): HResult; reintroduce; stdcall;
+  public
+
   end;
 
   TShellMenuFactory = class(TComObjectFactory)
@@ -173,7 +175,7 @@ const
 var
   Reg: TRegistry;
 begin
-  inherited UpdateRegistry (Register);
+  inherited UpdateRegistry(Register);
 
   Reg := TRegistry.Create;
   Reg.RootKey := HKEY_CLASSES_ROOT;
@@ -193,6 +195,6 @@ end;
 initialization
   TShellMenuFactory.Create(
     ComServer, TShellMenu, CLASS_SHELLMENU,
-    'ContextoPDFMenu', 'Extensão do ContextoPDF para menus de contexto',
+    'ContextoPDFMenu', 'Extensão do ContextoPDF para menu de contexto',
     ciMultiInstance, tmApartment);
 end.
